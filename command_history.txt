@@ -1,0 +1,20 @@
+history
+cd
+cd -
+history
+exit
+history
+exit
+history
+cd
+history
+pwd
+exit
+history
+exit
+cd 1 2
+cd
+echo vedant    nipane
+exit
+history
+exit
