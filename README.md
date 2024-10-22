@@ -1,7 +1,5 @@
 # Assignment 3 - Operating Systems and Algorithms
 
-![Custom Shell Logo](https://img.icons8.com/external-flaticons-flat-flat-icons/344/external-shell-web-flaticons-flat-flat-icons.png)
-
 ## Topic: Custom Shell Implementation
 
 ### Features
