@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <limits.h>
+#include <errno.h>
 #include "shell_helpers.h"
 
 #define MAX_INPUT_LENGTH 1024
@@ -60,6 +61,13 @@ int main()
             input[characters_read - 1] = '\0';
         }
 
+        // Check if input is empty (just Enter pressed)
+        if (strlen(input) == 0)
+        {
+            free(input);
+            continue;  // Skip processing if no command is entered
+        }
+
         // Allocate and copy input
         char *copy_input = (char *)malloc(strlen(input) + 1);
         strcpy(copy_input, input);
@@ -69,12 +77,19 @@ int main()
         int arg_c;
         tokenize(input, arg_v, &arg_c);
 
+        // Check if no tokens were found
+        if (arg_c == 0)
+        {
+            free(input);
+            free(copy_input);
+            continue;  // Skip processing if no arguments are found
+        }
+
         // Add the command to history only if it's not a duplicate and not empty
         if (arg_c > 0)
         {
             if (strcmp(arg_v[0], "history") != 0 || arg_c == 1)
             {
-                // printf("Adding command to history");
                 add_to_history(copy_input); // Save the command to history
             }
         }
@@ -115,9 +130,10 @@ int main()
         }
         else
         {
-            // Handle other commands (if applicable)
+            // Handle unknown commands
             printf("Command not found: %s\n", arg_v[0]);
         }
+
         save_history();
         free(input);
         free(copy_input);
