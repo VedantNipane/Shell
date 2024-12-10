@@ -1,5 +1,3 @@
-# Assignment 3 - Operating Systems and Algorithms
-
 ## Topic: Custom Shell Implementation
 
 ### Features
